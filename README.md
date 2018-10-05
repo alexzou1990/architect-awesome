@@ -430,6 +430,50 @@ Hbase、LevelDB、Tair（Long DB）、nessDB 采用 LSM 树的结构。LSM可以
 
 ### 希尔排序
 TODO
+![demo](https://images2015.cnblogs.com/blog/1024555/201611/1024555-20161128110416068-1421707828.png)
+```
+public class ShellSort
+{
+    public static void main(String[] args)
+    {
+        int[] a = { 49, 38, 65, 97, 76, 13, 27, 49, 78, 34, 12, 64, 1 };
+        System.out.println("排序之前：");
+        for (int i = 0; i < a.length; i++)
+        {
+            System.out.print(a[i] + " ");
+        }
+        // 希尔排序
+        int d = a.length;
+        while (true)
+        {
+            d = d / 2;
+            for (int x = 0; x < d; x++)
+            {
+                for (int i = x + d; i < a.length; i = i + d)
+                {
+                    int temp = a[i];
+                    int j;
+                    for (j = i - d; j >= 0 && a[j] > temp; j = j - d)
+                    {
+                        a[j + d] = a[j];
+                    }
+                    a[j + d] = temp;
+                }
+            }
+            if (d == 1)
+            {
+                break;
+            }
+        }
+        System.out.println();
+        System.out.println("排序之后：");
+        for (int i = 0; i < a.length; i++)
+        {
+            System.out.print(a[i] + " ");
+        }
+    }
+}
+```
 
 ### 堆排序
 * [《图解排序算法(三)之堆排序》](https://www.cnblogs.com/chengxiao/p/6129630.html)
@@ -617,9 +661,9 @@ KPM：Knuth-Morris-Pratt算法（简称KMP）
 	>* Java中的可重入锁：synchronized 和 java.util.concurrent.locks.ReentrantLock
 
 * [《ReenTrantLock可重入锁（和synchronized的区别）总结》](https://www.cnblogs.com/baizhanshi/p/7211802.html)
-	* synchronized 使用方便，编译器来加锁，是非公平锁。
-	* ReenTrantLock 使用灵活，锁的公平性可以定制。
-	* 相同加锁场景下，推荐使用 synchronized。
+	>* synchronized 使用方便，编译器来加锁，是非公平锁。
+	>* ReenTrantLock 使用灵活，锁的公平性可以定制。
+	>* 相同加锁场景下，推荐使用 synchronized。
 
 ### 互斥锁 & 共享锁
 
